@@ -28,6 +28,9 @@ import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -158,6 +161,10 @@ public class ListFileActivity extends AppCompatActivity {
 
             root = new File(path);
             }
+            if (root == null) {
+                path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/";
+                root = new File(path);
+            }
 
         if (getIntent().hasExtra("path")) {
             path = getIntent().getStringExtra("path");
@@ -206,6 +213,7 @@ public class ListFileActivity extends AppCompatActivity {
             }
 
 
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -232,7 +240,7 @@ public class ListFileActivity extends AppCompatActivity {
                 filelist.clear();
                 if (files != null) {
                     if (files.length != 0) {
-                        Toast.makeText(this, " files not empty", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(this, " files not empty", Toast.LENGTH_SHORT).show();
                         for (File file : files) {
                             filelist.add(file.getName());
 //                    List<String> childName = new ArrayList<>();
@@ -261,5 +269,19 @@ public class ListFileActivity extends AppCompatActivity {
         }
     }
 
+    public static void copyFile(File src, File dst) throws IOException {
+
+        FileInputStream var2 = new FileInputStream(src);
+        FileOutputStream var3 = new FileOutputStream(dst);
+        byte[] var4 = new byte[1024];
+
+        int var5;
+        while((var5 = var2.read(var4)) > 0) {
+            var3.write(var4, 0, var5);
+        }
+
+        var2.close();
+        var3.close();
+    }
 
 }
