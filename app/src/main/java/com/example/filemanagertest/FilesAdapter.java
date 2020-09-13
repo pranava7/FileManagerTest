@@ -5,6 +5,7 @@ import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -183,6 +184,7 @@ public class FilesAdapter extends RecyclerView.Adapter<FilesAdapter.MyViewHolder
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             mContext.startActivity(intent);
+            System.exit(0);
         } catch (ActivityNotFoundException e) {
             Toast.makeText(mContext, "No application found which can open the file", Toast.LENGTH_SHORT).show();
         }

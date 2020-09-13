@@ -141,6 +141,37 @@ public class ListFileActivity extends AppCompatActivity {
         try {
             path = path.substring(0 , path.length() - len);
             root = new File(path);
+            files = root.listFiles();
+
+
+
+
+            filelist.clear();
+
+            if (files != null) {
+                if (files.length != 0) {
+                    Toast.makeText(getApplicationContext(), " files not empty", Toast.LENGTH_SHORT).show();
+                    for (File file : files) {
+                        filelist.add(file.getName());
+//                                if (adapter != null) {
+//                                    adapter.notifyDataSetChanged();
+//                                }
+
+//                    List<String> childName = new ArrayList<>();
+//                    File child = new File(Environment.getDataDirectory().getAbsolutePath() + "/" + file.getName() + "/");
+//                    File[] childs = child.listFiles();
+//                    for (File childfile : childs) {
+//                        childName.add(file.getName());
+//                        childfiles.put(file.getName(), childName);
+//                    }
+                    }
+                }
+            }
+
+            adapter = new FilesAdapter(filelist, getApplicationContext());
+            recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext() , RecyclerView.VERTICAL , false));
+            recyclerView.setAdapter(adapter);
+
         } catch (Exception ignored) {
 
         }// hi
