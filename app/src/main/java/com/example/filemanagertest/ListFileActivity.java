@@ -139,7 +139,22 @@ public class ListFileActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         try {
-            path = path.substring(0 , path.length() - len);
+
+            if(path.substring(path.length() - 1).equals("/")) {
+                path = path.substring(0 , path.length() - 1);
+                int i = path.lastIndexOf("/");
+                path = path.substring(0 , i);
+
+
+            } else {
+//                path = path.substring(0, path.length() - len);
+
+                        int i = path.lastIndexOf("/");
+                        path = path.substring(0 , i);
+
+            }
+
+            Log.e("qwee",path);
             root = new File(path);
             files = root.listFiles();
 
@@ -150,7 +165,6 @@ public class ListFileActivity extends AppCompatActivity {
 
             if (files != null) {
                 if (files.length != 0) {
-                    Toast.makeText(getApplicationContext(), " files not empty", Toast.LENGTH_SHORT).show();
                     for (File file : files) {
                         filelist.add(file.getName());
 //                                if (adapter != null) {
@@ -214,7 +228,6 @@ public class ListFileActivity extends AppCompatActivity {
 
                     if (files != null) {
                         if (files.length != 0) {
-                            Toast.makeText(getApplicationContext(), " files not empty", Toast.LENGTH_SHORT).show();
                             for (File file : files) {
                                 filelist.add(file.getName());
 //                                if (adapter != null) {

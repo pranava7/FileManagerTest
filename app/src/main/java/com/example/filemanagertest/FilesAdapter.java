@@ -119,7 +119,7 @@ public class FilesAdapter extends RecyclerView.Adapter<FilesAdapter.MyViewHolder
                     mContext.startActivity(intent);
 
                 } else {
-                    Toast.makeText(mContext, filename + " is not a directory", Toast.LENGTH_LONG).show();
+
                     openFile(files[position]);
 
                 }
