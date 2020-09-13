@@ -143,7 +143,7 @@ public class ListFileActivity extends AppCompatActivity {
             root = new File(path);
         } catch (Exception ignored) {
 
-        }
+        }// hi
 
     }
 
